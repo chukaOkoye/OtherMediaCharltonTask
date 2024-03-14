@@ -1,5 +1,6 @@
 package com.example.othermediacharlton.data.api
 
+import com.example.othermediacharlton.data.model.FixturesDataModel
 import com.example.othermediacharlton.data.model.Match
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -10,7 +11,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 
 interface ApiService {
     @GET("fixtures")
-    fun getFixtures(): Observable<List<Match>>
+    fun getFixtures(): Observable<FixturesDataModel>
 
     companion object {
         private lateinit var apiService: ApiService
