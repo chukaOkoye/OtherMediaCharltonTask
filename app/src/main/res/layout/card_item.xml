@@ -115,7 +115,7 @@
                 android:layout_marginEnd="17dp"
                 android:layout_gravity="start|bottom"
                 android:background="#ffffff"
-                android:src="" />
+                 />
         </FrameLayout>
 
 
@@ -216,10 +216,10 @@
                 android:id="@+id/secondCalltoAction"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background=""
+                android:backgroundTint="@color/white"
                 android:fontFamily="@font/poppins_semi_bold"
                 android:text="Match Centre"
-                android:textColor="#c30017"
+                android:textColor="@color/red"
                 android:textSize="18sp" />
 
         </LinearLayout>
