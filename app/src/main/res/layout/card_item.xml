@@ -206,17 +206,16 @@
                 android:layout_width="155dp"
                 android:layout_height="48dp"
                 android:layout_marginEnd="17dp"
-                android:background="#131313"
                 android:fontFamily="@font/poppins_semi_bold"
                 android:text="Report"
                 android:textSize="18sp"
-                app:backgroundTint="#131313" />
+                android:background="@drawable/custom_button_shape"
+                app:backgroundTint="@color/red" />
 
             <Button
                 android:id="@+id/secondCalltoAction"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:backgroundTint="@color/white"
                 android:fontFamily="@font/poppins_semi_bold"
                 android:text="Match Centre"
                 android:textColor="@color/red"
