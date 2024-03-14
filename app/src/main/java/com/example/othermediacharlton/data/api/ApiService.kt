@@ -3,10 +3,10 @@ package com.example.othermediacharlton.data.api
 import com.example.othermediacharlton.data.model.Match
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import io.reactivex.Observable
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 
 interface ApiService {
     @GET("fixtures")
@@ -22,7 +22,7 @@ interface ApiService {
                     .baseUrl("https://3e0093ee-a397-4a87-bc26-ef97480c5292.mock.pstmn.io/")
                     .client(OkHttpClient())
                     .addConverterFactory(GsonConverterFactory.create())
-                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create() )
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create() )
                     .build().create(ApiService::class.java)
                 apiService
             }
