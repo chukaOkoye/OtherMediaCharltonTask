@@ -1,15 +1,20 @@
 package com.example.othermediacharlton.viewmodel
 
+import LocalDataSource
 import android.annotation.SuppressLint
+import android.app.Application
 import android.content.ContentValues.TAG
 import android.util.Log
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.othermediacharlton.data.api.ApiService
 import com.example.othermediacharlton.data.api.NetworkDataSource
+import com.example.othermediacharlton.data.database.MatchesDatabase
 import com.example.othermediacharlton.data.model.FixturesDataModel
 import com.example.othermediacharlton.data.model.Match
+import com.example.othermediacharlton.data.repository.FixtureRepository
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -18,15 +23,18 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.flow.MutableStateFlow
 
 @SuppressLint("CheckResult")
-class MainActivityViewModel: ViewModel() {
+class MainActivityViewModel(application: Application): AndroidViewModel(application) {
 
     private val matchList: MutableLiveData<FixturesDataModel> = MutableLiveData()
 
     init {
         val apiService = ApiService.getInstance()
+        val database = MatchesDatabase.getInstance(application)
+        val localDataSource = LocalDataSource(database)
         val networkDataSource = NetworkDataSource(apiService)
+        val repository = FixtureRepository(networkDataSource, localDataSource)
 
-        networkDataSource.getMatchList()
+        repository.getFixtures()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
