@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
 }
 
 android {
@@ -36,6 +37,7 @@ android {
 }
 
 dependencies {
+    val room_version = "2.6.1"
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -53,13 +55,12 @@ dependencies {
     implementation ("io.reactivex.rxjava2:rxkotlin:2.3.0")
     implementation ("io.reactivex.rxjava2:rxandroid:2.1.0")
 
-    val room_version = "2.6.1"
+
 
     implementation("androidx.room:room-runtime:$room_version")
     annotationProcessor("androidx.room:room-compiler:$room_version")
 
-// To use Kotlin Symbol Processing (KSP)
-
+    kapt("androidx.room:room-compiler:$room_version")
     implementation("androidx.room:room-rxjava2:$room_version")
 
     implementation ("com.github.bumptech.glide:glide:4.12.0")
