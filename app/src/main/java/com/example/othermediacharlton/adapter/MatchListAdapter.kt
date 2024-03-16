@@ -87,10 +87,15 @@ class MatchListAdapter: RecyclerView.Adapter<MatchListAdapter.MyViewHolder>()   
              }
 
 
-             val url = data.matchInfo.contestant[0].crest.uri1x
-             if(data.matchInfo.contestant[0].code != "CHA" &&
-                 data.matchInfo.contestant[1].code != "CHA"){
-                 Glide.with(opponentImagePlaceHolder)
+             var url: String? = null
+             for (contestant in data.matchInfo.contestant) {
+                 if (contestant.code != "CHA") {
+                     url = contestant.crest.uri1x
+                     break
+                 }
+             }
+             url?.let {
+                 Glide.with(itemView)
                      .load(url)
                      .into(opponentImagePlaceHolder)
              }
@@ -111,16 +116,12 @@ class MatchListAdapter: RecyclerView.Adapter<MatchListAdapter.MyViewHolder>()   
          }
 
         private fun formatDate(timestampInSeconds: Long): String {
-            // Convert Unix timestamp to milliseconds
             val timestampInMillis = timestampInSeconds * 1000
 
-            // Create a Date object
             val date = Date(timestampInMillis)
 
-            // Define the desired date format
             val dateFormat = SimpleDateFormat("dd/MM/yy", Locale.getDefault())
 
-            // Format the date to the desired format
             return dateFormat.format(date)
         }
     }
