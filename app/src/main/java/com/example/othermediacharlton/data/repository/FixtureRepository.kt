@@ -26,11 +26,11 @@ import io.reactivex.schedulers.Schedulers
 import com.example.othermediacharlton.data.model.Venue
 import com.google.gson.reflect.TypeToken
 
-class FixtureRepository(
+open class FixtureRepository(
     private val networkDataSource: NetworkDataSource,
     private val localDataSource: LocalDataSource) {
 
-    fun getFixtures(): Observable<FixturesDataModel> {
+    open fun getFixtures(): Observable<FixturesDataModel> {
         return localDataSource.getAllMatches()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
