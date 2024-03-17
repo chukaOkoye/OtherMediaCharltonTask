@@ -27,9 +27,7 @@ import com.example.othermediacharlton.data.model.Venue
 import com.google.gson.reflect.TypeToken
 
 class FixtureRepository(
-//    private val database: MatchesDatabase,
-                        private val networkDataSource: NetworkDataSource,
-//                        private val matchesDao: MatchesDao,
+    private val networkDataSource: NetworkDataSource,
     private val localDataSource: LocalDataSource) {
 
     fun getFixtures(): Observable<FixturesDataModel> {
@@ -53,8 +51,6 @@ class FixtureRepository(
                     Observable.empty() // Emit empty observable if database is not empty
                 }
             }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
     }
 
     private fun toEntityFixtures(fixturesDataModels: List<FixturesDataModel>): List<FixturesEntity> {
@@ -66,7 +62,7 @@ class FixtureRepository(
 
     private fun List<FixturesEntity>.toFixturesDataModel() = map {
         val matchString = it.matches
-        val type = object : TypeToken<ArrayList<Match>>() {}.type
+        val type = object : TypeToken<ArrayList<Match>>(){}.type
         val matchList: ArrayList<Match> = Gson().fromJson(matchString, type)
         FixturesDataModel(matchList)
     }
