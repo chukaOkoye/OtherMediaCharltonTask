@@ -7,20 +7,34 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <Toolbar
-        android:id="@+id/fixturesTopBar"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/tool_bar_cardview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:title="@string/fixtures"
-        tools:ignore="MissingConstraints" />
+        app:cardElevation="4dp"
+        tools:ignore="MissingConstraints">
+
+        <Toolbar
+            android:id="@+id/fixturesTopBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:title="@string/fixtures"
+            tools:ignore="MissingConstraints"
+            app:actionOverflowButtonStyle="@style/AppTheme.PopupOverlay"/>
+
+    </androidx.cardview.widget.CardView>
+
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fixturesTopBar"
-        android:padding="8dp"/>
+        app:layout_constraintTop_toBottomOf="@+id/tool_bar_cardview"
+        android:paddingBottom="24dp"
+        android:padding="8dp"
+        />
 
     <LinearLayout
         android:id="@+id/emptyStateLayout"
@@ -28,7 +42,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@id/fixturesTopBar"
+        app:layout_constraintTop_toBottomOf="@id/tool_bar_cardview"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">

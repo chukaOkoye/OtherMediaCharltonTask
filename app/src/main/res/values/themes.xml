@@ -5,5 +5,9 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
+    <style name="AppTheme.PopupOverlay" parent="Widget.AppCompat.PopupMenu.Overflow">
+        <item name="android:tint">@color/red</item>
+    </style>
+
     <style name="Theme.OtherMediaCharlton" parent="Base.Theme.OtherMediaCharlton" />
 </resources>
