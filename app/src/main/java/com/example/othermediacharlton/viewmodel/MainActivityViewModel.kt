@@ -22,9 +22,10 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.flow.MutableStateFlow
 
-@SuppressLint("CheckResult")
+
 class MainActivityViewModel(application: Application): AndroidViewModel(application) {
 
+    private val repository: FixtureRepository
     private val matchList: MutableLiveData<FixturesDataModel> = MutableLiveData()
 
     init {
@@ -32,10 +33,13 @@ class MainActivityViewModel(application: Application): AndroidViewModel(applicat
         val database = MatchesDatabase.getInstance(application)
         val localDataSource = LocalDataSource(database)
         val networkDataSource = NetworkDataSource(apiService)
-        val repository = FixtureRepository(networkDataSource, localDataSource)
+        repository = FixtureRepository(networkDataSource, localDataSource)
+    }
 
-        repository.getFixtures()
-            .subscribeOn(Schedulers.io())
+    fun getMatchListLiveData(): LiveData<FixturesDataModel> {
+        val values = repository.getFixtures()
+
+        values.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 { matches ->
@@ -45,40 +49,10 @@ class MainActivityViewModel(application: Application): AndroidViewModel(applicat
                 },
                 { throwable ->
                     // Handle errors if any
+                    throwable.message
                     Log.e(TAG, "Error fetching match list: ${throwable.message}")
                 }
-            )
-    }
-
-    fun getMatchListLiveData(): LiveData<FixturesDataModel> {
+            ).isDisposed
         return matchList
     }
 }
-
-
-
-//    fun getMatchListObserver(): MutableLiveData<List<Match>>{
-//        return matchList
-//    }
-
-
-//    fun getMatchListObserverRx(): Observer<List<Match>>{
-//        return object : Observer<List<Match>>{
-//            override fun onComplete() {
-//
-//            }
-//
-//            override fun onError(e: Throwable) {
-//                matchList.postValue(null)
-//            }
-//
-//            override fun onNext(t: List<Match>) {
-//                matchList.postValue(t)
-//            }
-//
-//            override fun onSubscribe(d: Disposable) {
-//
-//            }
-//        }
-//    }
-
