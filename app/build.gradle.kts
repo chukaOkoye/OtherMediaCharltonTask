@@ -55,6 +55,9 @@ dependencies {
     implementation ("io.reactivex.rxjava2:rxkotlin:2.3.0")
     implementation ("io.reactivex.rxjava2:rxandroid:2.1.0")
 
+    testImplementation ("org.mockito:mockito-core:3.12.4")
+    testImplementation ("androidx.arch.core:core-testing:2.1.0")
+
 
 
     implementation("androidx.room:room-runtime:$room_version")
