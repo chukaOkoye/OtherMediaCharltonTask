@@ -1,5 +1,7 @@
 package com.example.othermediacharlton.adapter
 
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.icu.text.SimpleDateFormat
 import android.view.LayoutInflater
 import android.view.View
@@ -68,23 +70,34 @@ class MatchListAdapter: RecyclerView.Adapter<MatchListAdapter.MyViewHolder>()   
              matchInfo.text = timestampInSeconds
              venueShortName.text = data.matchInfo.venue.shortName
 
-             if (data.liveData.matchStatus == "Played"){
+             if (data.liveData.matchStatus == "Played") {
                  matchStatusIconPlayed.setImageResource(R.drawable.icon_match_status_played)
-             } else {
-                 // Set the default drawable for the ImageView
-                 matchStatusIconPlayed.setImageResource(R.drawable.icon_match_status_fixture)
-             }
-             homeTeam.text = data.matchInfo.contestant[0].name
-             awayTeam.text = data.matchInfo.contestant[1].name
-
-
-             if (data.liveData.matchStatus == "Played"){
+                 homeTeam.text = data.matchInfo.contestant[0].name
+                 awayTeam.text = data.matchInfo.contestant[1].name
                  homeTeamScore.text = data.liveData.homeScore.toString()
                  awayTeamScore.text = data.liveData.awayScore.toString()
+                 firstCalltoAction.setText(report)
+                 secondCalltoAction.setText(matchCentre)
+                 secondCalltoAction.backgroundTintList =
+                     ColorStateList.valueOf(ContextCompat.getColor(itemView.context, R.color.clear))
+                 secondCalltoAction.setTextColor(
+                     ContextCompat.getColor(itemView.context, R.color.red))
              } else {
+                 matchStatusIconPlayed.setImageResource(R.drawable.icon_match_status_fixture)
+                 homeTeam.text = data.matchInfo.contestant[0].name
+                 awayTeam.text = data.matchInfo.contestant[1].name
                  homeTeamScore.text = resources.getString(R.string.empty_string)
                  awayTeamScore.text = resources.getString(R.string.kick_off_time_default)
+                 firstCalltoAction.setText(buyTickets)
+                 firstCalltoAction.backgroundTintList =
+                     ColorStateList.valueOf(ContextCompat.getColor(itemView.context, R.color.red))
+                 firstCalltoAction.setText(buyTickets)
+                 secondCalltoAction.setText(hospitality)
+                 secondCalltoAction.backgroundTintList =
+                     ColorStateList.valueOf(ContextCompat.getColor(itemView.context, R.color.black))
+                 secondCalltoAction.setTextColor(Color.WHITE)
              }
+
 
 
              var url: String? = null
@@ -102,15 +115,16 @@ class MatchListAdapter: RecyclerView.Adapter<MatchListAdapter.MyViewHolder>()   
 
 
              if (data.liveData.matchStatus == "Played"){
-                 firstCalltoAction.setBackgroundColor(
-                     ContextCompat.getColor(itemView.context, R.color.black))
                  firstCalltoAction.setText(report)
                  secondCalltoAction.setText(matchCentre)
 
              } else {
-                 firstCalltoAction.setBackgroundResource(R.drawable.custom_button_shape)
                  firstCalltoAction.setText(buyTickets)
                  secondCalltoAction.setText(hospitality)
+                 secondCalltoAction.backgroundTintList =
+                     ColorStateList.valueOf(ContextCompat
+                         .getColor(itemView.context, R.color.black))
+                 secondCalltoAction.setTextColor(Color.WHITE)
              }
 
          }
