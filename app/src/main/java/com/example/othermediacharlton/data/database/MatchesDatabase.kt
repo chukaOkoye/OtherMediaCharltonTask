@@ -7,7 +7,6 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 
 @Database(entities = [FixturesEntity::class], version = 1)
-@TypeConverters(Converters::class)
 abstract class MatchesDatabase : RoomDatabase(){
 
     abstract fun matchesDao(): MatchesDao
