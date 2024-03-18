@@ -188,8 +188,9 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
             android:orientation="horizontal">
 
             <Button
@@ -197,22 +198,25 @@
                 android:layout_width="155dp"
                 android:layout_height="48dp"
                 android:layout_marginEnd="17dp"
+                android:background="@drawable/custom_button_shape"
                 android:fontFamily="@font/poppins_semi_bold"
                 android:text="Report"
+                android:gravity="center_horizontal"
                 android:textSize="18sp"
-                android:background="@drawable/custom_button_shape"
                 app:backgroundTint="@color/black" />
 
             <Button
                 android:id="@+id/secondCalltoAction"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/custom_button_shape2"
+                android:backgroundTint="@color/clear"
                 android:fontFamily="@font/poppins_semi_bold"
                 android:text="Match Centre"
+                android:gravity="center_horizontal"
                 android:textColor="@color/red"
-                android:background="@drawable/custom_button_shape2"
-                android:textSize="18sp"
-                android:backgroundTint="@color/clear"/>
+                android:textSize="18sp" />
 
         </LinearLayout>
 
