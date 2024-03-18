@@ -9,6 +9,5 @@ data class LiveData(
     @SerializedName("home_score")
     val homeScore: Int,
     @SerializedName("matchStatus")
-    val matchStatus: String,
-
+    val matchStatus: String
 )
