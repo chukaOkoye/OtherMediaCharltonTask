@@ -1,8 +1,10 @@
 package com.example.othermediacharlton.adapter
 
+import android.content.ContentValues.TAG
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.icu.text.SimpleDateFormat
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -69,6 +71,13 @@ class MatchListAdapter: RecyclerView.Adapter<MatchListAdapter.MyViewHolder>()   
              val timestampInSeconds = formatDate(data.matchInfo.date.toLong())
              matchInfo.text = timestampInSeconds
              venueShortName.text = data.matchInfo.venue.shortName
+             firstCalltoAction.setOnClickListener {
+                 Log.d(TAG, "Clicked firstCalltoAction: ${data.matchInfo.firstCallToAction}")
+             }
+
+             secondCalltoAction.setOnClickListener {
+                 Log.d(TAG, "Clicked secondCalltoAction: ${data.matchInfo.firstCallToAction}")
+             }
 
              if (data.liveData.matchStatus == "Played") {
                  matchStatusIconPlayed.setImageResource(R.drawable.icon_match_status_played)
@@ -78,6 +87,8 @@ class MatchListAdapter: RecyclerView.Adapter<MatchListAdapter.MyViewHolder>()   
                  awayTeamScore.text = data.liveData.awayScore.toString()
                  firstCalltoAction.setText(report)
                  secondCalltoAction.setText(matchCentre)
+                 firstCalltoAction.backgroundTintList =
+                     ColorStateList.valueOf(ContextCompat.getColor(itemView.context, R.color.black))
                  secondCalltoAction.backgroundTintList =
                      ColorStateList.valueOf(ContextCompat.getColor(itemView.context, R.color.clear))
                  secondCalltoAction.setTextColor(
@@ -98,8 +109,6 @@ class MatchListAdapter: RecyclerView.Adapter<MatchListAdapter.MyViewHolder>()   
                  secondCalltoAction.setTextColor(Color.WHITE)
              }
 
-
-
              var url: String? = null
              for (contestant in data.matchInfo.contestant) {
                  if (contestant.code != "CHA") {
@@ -111,20 +120,6 @@ class MatchListAdapter: RecyclerView.Adapter<MatchListAdapter.MyViewHolder>()   
                  Glide.with(itemView)
                      .load(url)
                      .into(opponentImagePlaceHolder)
-             }
-
-
-             if (data.liveData.matchStatus == "Played"){
-                 firstCalltoAction.setText(report)
-                 secondCalltoAction.setText(matchCentre)
-
-             } else {
-                 firstCalltoAction.setText(buyTickets)
-                 secondCalltoAction.setText(hospitality)
-                 secondCalltoAction.backgroundTintList =
-                     ColorStateList.valueOf(ContextCompat
-                         .getColor(itemView.context, R.color.black))
-                 secondCalltoAction.setTextColor(Color.WHITE)
              }
 
          }
