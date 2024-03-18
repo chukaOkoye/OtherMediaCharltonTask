@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun initRecyclerView() {
+    private fun initRecyclerView() {
         recyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
         matchListAdapter = MatchListAdapter()
@@ -46,7 +46,9 @@ class MainActivity : AppCompatActivity() {
     private fun loadAPIData() {
         viewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
 
-        viewModel.getMatchListLiveData().observe(this) { fixturesDataModel ->
+        viewModel.getMatchListLiveData()
+
+        viewModel.matchList.observe(this) { fixturesDataModel ->
             if (fixturesDataModel.match.isEmpty()) {
                 // Data is not present, show empty state
                 showEmptyState()

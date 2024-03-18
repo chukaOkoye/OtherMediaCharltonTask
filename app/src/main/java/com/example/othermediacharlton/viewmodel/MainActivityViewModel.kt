@@ -26,7 +26,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 class MainActivityViewModel(application: Application): AndroidViewModel(application) {
 
     private val repository: FixtureRepository
-    private val matchList: MutableLiveData<FixturesDataModel> = MutableLiveData()
+    private val _matchList: MutableLiveData<FixturesDataModel> = MutableLiveData()
+    val matchList: LiveData<FixturesDataModel> = _matchList
 
     init {
         val apiService = ApiService.getInstance()
@@ -44,7 +45,7 @@ class MainActivityViewModel(application: Application): AndroidViewModel(applicat
             .subscribe(
                 { matches ->
                     // Update the LiveData with the fetched match list
-                    matchList.value = matches
+                    _matchList.value = matches
                     Log.d(TAG, "ViewModel Connection success!")
                 },
                 { throwable ->
@@ -53,6 +54,6 @@ class MainActivityViewModel(application: Application): AndroidViewModel(applicat
                     Log.e(TAG, "Error fetching match list: ${throwable.message}")
                 }
             ).isDisposed
-        return matchList
+        return _matchList
     }
 }
