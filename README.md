@@ -19,5 +19,7 @@ Requirements:
 
 ## My Approach
 - Worked on making sure the main objectives were completed, used RxJava to process data and saved to local database.
-- If I had more time, I would've worked on dependency injection to include adequate testing.
+- Used MVVM architecture to keep the UI separate from the data processing, whilst using a RecyclerView to display the list.
+- Used the Adapter to change the UI elements according to the data model conditions of the match status.
+- If I had more time, I would've worked on dependency injection to include adequate testing and adjust loading state.
 - Future work: Left the unused data models in-case to include additional match data elements for future features.
